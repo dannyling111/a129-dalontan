@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f3ebdd;
+  --color-paper-2: #e8dcc8;
+  --color-paper-3: #dccdb4;
+  --color-ink: #2a3328;
+  --color-ink-soft: #5c6560;
+  --color-ink-faint: #8b9288;
+  --color-sage: #4f6f56;
+  --color-sage-2: #6d8a72;
+  --color-sage-deep: #3b5541;
+  --color-lake: #5e93a4;
+  --color-blush: #c98990;
+  --color-line: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  --color-line-strong: color-mix(in oklab, var(--color-ink) 22%, transparent);
+  --color-overlay: color-mix(in oklab, var(--color-ink) 42%, transparent);
+
+  --font-display: "Fraunces", "Noto Serif SC", "Songti SC", serif;
+  --font-sans: "Figtree", "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
+  --font-cjk: "Noto Serif SC", "Songti SC", serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  --shadow-paper: 0 10px 40px color-mix(in oklab, var(--color-ink) 16%, transparent);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+.game-shell {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  height: 100svh;
+  overflow: hidden;
+  background: #1c2420;
+  touch-action: none;
+  user-select: none;
+}
+
+.game-shell canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+}
+
+.hud-panel {
+  background: color-mix(in oklab, var(--color-paper) 92%, transparent);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-paper);
+  backdrop-filter: blur(10px);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.title-enter {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.need-bar {
+  height: 4px;
+  border-radius: 99px;
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+.need-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-sage);
+}
+
+.joystick-base {
+  width: 118px;
+  height: 118px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line-strong);
+  background: color-mix(in oklab, var(--color-paper) 55%, transparent);
+  position: relative;
+  touch-action: none;
+}
+
+.joystick-knob {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: var(--color-ink);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
